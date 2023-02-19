@@ -1,31 +1,53 @@
-const businessHour = h =>{
-  return (h >= 9  && h <= 18) ? true : false;
+/* 
+  Crear sistema de calendario para verificar si el dia actual, junto a la hora es 
+  considerada dia y horario laboral estandar
+    9am - 6pm es horario laboral
+    new Date().getDay() resulta en el dia de la semana del 0-6
+
+  Funcion businessHours
+  Parametros
+    hour <- Hora actual
+  return
+    true / false si la hora actual es horario laboral
+  Funcion businessDay
+  Parametros
+    day
+  return
+    true / false si la hora actual es horario laboral
+  Verificacion de la resolucion de ambas funciones debe mostrar un mensaje
+
+*/
+
+const businessHour = () =>{
+  const hour = new Date().getHours();
+  return  (hour >= 9 && hour <= 18) ? true : false;
 }
 
-const businessDay = d =>{
+const businessDay = (day) =>{
+  const d = new Date(2023,1,day).getDay();
   return (d > 0 && d < 6) ? true : false;
 }
 
-const laboralTime = (h,d) =>{
-  const sad = new Date(2023,1,2,16);
-
-  console.log(businessHour(h))
-  console.log(businessDay(d))
+const laboralTime = d =>{
+  return (businessHour() === true && businessDay(d) === true) ? true : false;
 }
 
-laboralTime(15, 4);
+console.log(laboralTime(15))
 
-// Ejercicio 04
-// Escribir una funcion que regrese la cantidad de valores true que hay en un array
-/* 
+/*
+  Ejercicio 04
+  Escribir una funcion que regrese la cantidad de valores true que hay en un array
+ 
   countTrue([true, false, false, true, false]) ➞ 2
 
   countTrue([false, false, false, false]) ➞ 0
 
   countTrue([]) ➞ 0
+  
+  Regresar 0 si el array es vacio
+  
+  usar recurcion
  */
-// Regresar 0 si el array es vacio
-// usar recurcion
 
 let i = 0, count = 0;
 
@@ -70,55 +92,11 @@ console.log(serieFibo(11))
 // Encontrar el numero n de una figura piramidal triangular (tetrahedron)
 // (nivel) -> cantidad de numeritos
 
-// const arrayCircles = [];
-// let a = 0, aum = 1, r = 0;
-// i = 0;
-// const tamPiramide = nivel => {
-  
-//   while(i < nivel){
-//     i
-//     if(i == 0){
-//       arrayCircles.push(1);
-//     }
-//     else if(i == 1){
-//       arrayCircles.push(1);
-//       arrayCircles.push(1);
-//       a = 1;
-//     }
-//     else{
-//       arrayCircles.push(1);
-//       r = arrayCircles.length-1;
-//       r
-//       for(let m = 0; m < aum; m++){
-//         let num = arrayCircles[a] + arrayCircles[a+1];
-//         console.log(arrayCircles[a])
-//         a
-//         console.log(arrayCircles[a+1])
-//         arrayCircles[a+1]
-//         num
-//         arrayCircles.push(num);
-//       }
-//       arrayCircles.push(1);
-//       a = r;
-//       a
-//       aum ++;
-//     }
-//     i++;
-//     console.log(arrayCircles.length);
-//     console.log(arrayCircles);
-//   }
-//   return arrayCircles.length;
-// }
-
-// console.log(tamPiramide(2))
-
-
 const tamPiramide = (nivel) => {
     return (nivel * (nivel+1)*(nivel+2))/6;
 }
 
 console.log(tamPiramide(2));
-//console.log(sad.length - 1);
 
 // Ejercicio 08
 // Crear una funcion que tome el nombre de un pais y su area
@@ -130,7 +108,7 @@ console.log(tamPiramide(2));
 const tierra = 148939390.2439024;
 
 const areaPais = (pais, area) => {
-  return `El país de ${pais} tiene un %${(area / tierra)*100} de la superficie de la tierra`;
+  return `El país de ${pais} tiene un %${((area / tierra)*100.).toFixed(2)} de la superficie de la tierra`;
 }
 
 console.log(areaPais('Rusia',17098242))
@@ -139,7 +117,12 @@ console.log(areaPais('Rusia',17098242))
 // Escribir una funcion que retorne 0 si el input es 1 y 1 si el input es 0
 // No se pueden utilizar condicionales, ternarios, negaciones ni operatores bit
 
+const trans = i => {
+  const array = ['1','0'];
+  return array[i];
+}
 
+console.log(trans(0));
 
 // Ejercicio 10
 // Messenger bzzz
@@ -149,3 +132,19 @@ console.log(areaPais('Rusia',17098242))
 // Si hay 2 personas -> "user1 y user2 estan en linea"
 // Si hay n>2 personas, "user1 y n-1 mas estan en linea"
 
+const MessengerBzzz = num => {
+  switch(true){
+    case num <= 0: console.log("No hay nadie en linea");
+            break;
+    case num == 1: console.log("user1 esta en linea");
+            break;
+    case num == 2: console.log("user1 y user2 estan en linea");
+            break;
+    case num >= 3-100:  console.log(`user1 y ${num-1} mas estan en linea`);
+                    break;
+    default:  console.log(`Número inválido, por favor ingrese un número válido`);
+              break;
+  }
+}
+
+MessengerBzzz(5);
