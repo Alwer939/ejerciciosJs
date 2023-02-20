@@ -32,7 +32,7 @@ const laboralTime = d =>{
   return (businessHour() === true && businessDay(d) === true) ? true : false;
 }
 
-console.log(laboralTime(15))
+console.log(laboralTime(20));
 
 /*
   Ejercicio 04
@@ -52,14 +52,14 @@ console.log(laboralTime(15))
 let i = 0, count = 0;
 
 const countTrue = arrayTrue =>{
-  if(arrayTrue[i] == true){
-    count ++;
+  if(arrayTrue[i] == true){   //  Al entrar a la funcion verificamos si el elemento actual del array es true
+    count ++; //  Al ser true, aumentamos el contador
   }
-  if(i <= arrayTrue.length){
+  if(i <= arrayTrue.length){  //  Si el array no ha llegado al final entra en la funcion para aumentar el indice del array
     i++;
-    countTrue(arrayTrue);
+    countTrue(arrayTrue); //  Y realizar la recursividad, para llegar al ultimo elemento del array y retornar el contador
   }
-  return count;
+  return count; //  la funcion finaliza retornando el cotador final
 }
 
 console.log(countTrue([true, false, true, false, false]));
@@ -68,32 +68,48 @@ console.log(countTrue([true, false, true, false, false]));
 // Escribir una funcion para encontrar el mayor comun divisor de 2 numeros positivos enteros
 // Usar recursion
 
+// const maximoComunDivisor = (n1, n2) => {
+//   return (n2 === 0) ? n1 : maximoComunDivisor(n2, n1 % n2); //  Esta es una formula matematica que ya esta compuesta para enviar un residuo de dos numeros
+// };
+
 const maximoComunDivisor = (n1, n2) => {
-  return (n2 === 0) ? n1 : maximoComunDivisor(n2, n1 % n2);
+  if(n2 === 0){
+    n1
+    n2
+    return n1;
+  }
+  else{
+    n1
+    n2
+    maximoComunDivisor(n2, n1 % n2);
+  }
 };
 
-console.log(maximoComunDivisor(9,81));
+console.log(maximoComunDivisor(81,9));
 
 // Ejercicio 06
 // Encontrar los primeros n elementos de la serie fibonacci
 // Usar recursion 
 
 const serieFibo = (num) =>{
-  let fibo = [0,1];
-  for(let i=2; i <= num; i++){
-    fibo.push(fibo[i-1] + fibo[i-2]);
+  if(num != 0){ //  Esta comprovacion es para validar que no se quede en 0 la serie
+    let fibo = [0,1]; //  Inicializamos los 2 primeros elementos para facilitar la obtencion de la serie 
+    for(let i=2; i <= num; i++){  //  Se inicializa i en 2 porque los primeros dos elementos ya los tenemos
+      fibo.push(fibo[i-1] + fibo[i-2]); //  Para obetener el siguiente elemento de la serie, sumamos los dos elementos anteriores
+    }
+    return fibo;
   }
-  return fibo;
+  return 0;
 }
 
-console.log(serieFibo(11))
+console.log(serieFibo(16))
 	
 // Ejercicio 07
 // Encontrar el numero n de una figura piramidal triangular (tetrahedron)
 // (nivel) -> cantidad de numeritos
 
 const tamPiramide = (nivel) => {
-    return (nivel * (nivel+1)*(nivel+2))/6;
+  return (nivel * (nivel+1)*(nivel+2))/6; //  Esta es una formula matematica que ya esta compuesta para dar el valor del tamaño de la piramide
 }
 
 console.log(tamPiramide(2));
@@ -107,9 +123,9 @@ console.log(tamPiramide(2));
 
 const tierra = 148939390.2439024;
 
-const areaPais = (pais, area) => {
+const areaPais = (pais, area) => {  //  Esta operacion es una regla de 3 para obtener el porcentaje del area
   return `El país de ${pais} tiene un %${((area / tierra)*100.).toFixed(2)} de la superficie de la tierra`;
-}
+} //                                                           .toFixed limita los decimales 
 
 console.log(areaPais('Rusia',17098242))
   
@@ -118,7 +134,7 @@ console.log(areaPais('Rusia',17098242))
 // No se pueden utilizar condicionales, ternarios, negaciones ni operatores bit
 
 const trans = i => {
-  const array = ['1','0'];
+  const array = ['1','0'];  //  retornamos el elemento del array con el indice que nos da el usuario
   return array[i];
 }
 
@@ -132,15 +148,15 @@ console.log(trans(0));
 // Si hay 2 personas -> "user1 y user2 estan en linea"
 // Si hay n>2 personas, "user1 y n-1 mas estan en linea"
 
-const MessengerBzzz = num => {
+const MessengerBzzz = num => {  //  Tenemos un case para los 4 casos probables
   switch(true){
-    case num <= 0: console.log("No hay nadie en linea");
-            break;
-    case num == 1: console.log("user1 esta en linea");
-            break;
-    case num == 2: console.log("user1 y user2 estan en linea");
-            break;
-    case num >= 3-100:  console.log(`user1 y ${num-1} mas estan en linea`);
+    case num <= 0:  console.log("No hay nadie en linea");  //  Validamos para los negativos y el 0
+                    break;
+    case num == 1:  console.log("user1 esta en linea");
+                    break;
+    case num == 2:  console.log("user1 y user2 estan en linea");
+                    break;
+    case num >= 3:  console.log(`user1 y ${num-1} mas estan en linea`); //  Y este para todos los casos arriba de 3 
                     break;
     default:  console.log(`Número inválido, por favor ingrese un número válido`);
               break;
